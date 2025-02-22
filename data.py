@@ -1,23 +1,31 @@
 import os
 import csv
 
-# Folder containing images
-image_folder = "Project"
+# Define folders with their corresponding labels
+folders = {
+    "normal": r"C:/Users/Admin/Desktop/hiproject/Project/normal",
+    "pothole": r"C:/Users/Admin/Desktop/hiproject/Project/potholes"
+}
+
 csv_file = "dataa.csv"
 
-# Ensure the folder exists
-if not os.path.exists(image_folder):
-    print(f"Error: Folder '{image_folder}' not found!")
-else:
-    # Get all image file names (supports .png, .jpg, .jpeg, etc.)
-    image_files = [f for f in os.listdir(image_folder) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp'))]
+# Open CSV file for writing
+with open(csv_file, mode='w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Lab", "Path"])  # CSV headers
 
-    # Write to CSV file
-    with open(csv_file, mode='w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(["Filename", "Path"])  # CSV headers
+    for label, folder_path in folders.items():
+        if not os.path.exists(folder_path):
+            print(f"Error: Folder '{folder_path}' not found!")
+            continue  # Skip this folder if it doesn't exist
+
+        # Get image files from the folder
+        image_files = [f for f in os.listdir(folder_path) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp'))]
 
         for image in image_files:
-            writer.writerow([image, os.path.join(image_folder, image)])
+            image_path = os.path.join(folder_path, image)
+            writer.writerow([label, image_path])  # Write label and path
 
-    print(f"CSV file '{csv_file}' created successfully with {len(image_files)} entries!")
+        print(f"Added {len(image_files)} images from '{folder_path}' under label '{label}'.")
+
+print(f"CSV file '{csv_file}' created successfully!")
