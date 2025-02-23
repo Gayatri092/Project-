@@ -1,11 +1,11 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import Sequential   # type: ignore
+from tensorflow.keras.layers import Dense    # type: ignore
 
 
-csv_file = "dataa.csv" 
+csv_file = "C:/Users/Admin/Desktop/hiproject/Project/dataa.csv" 
 data = pd.read_csv(csv_file)
 
 
@@ -26,12 +26,12 @@ categorical_columns = ['category_column']
 data = pd.get_dummies(data, columns=[col for col in categorical_columns if col in data.columns])
 
 # Define target variable (ensure this column exists)
-target_column = 'target_column'  # Update with actual target column
+target_column = 'Label'  # Update with actual target column
 if target_column in data.columns:
     X = data.drop(target_column, axis=1)
     y = data[target_column]
 else:
-    raise ValueError(f"Target column '{target_column}' not found in dataset")
+    raise ValueError(f"Label '{target_column}' not found in dataset")
 
 # Split the dataset
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)

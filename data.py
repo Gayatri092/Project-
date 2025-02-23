@@ -12,7 +12,7 @@ csv_file = "dataa.csv"
 # Open CSV file for writing
 with open(csv_file, mode='w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(["Lab", "Path"])  # CSV headers
+    writer.writerow(["Label", "Path"])  # CSV headers
 
     for label, folder_path in folders.items():
         if not os.path.exists(folder_path):

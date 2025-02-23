@@ -2,21 +2,29 @@
 import numpy as np
 import cv2
 import glob
-from keras.models import Sequential
-from keras.models import load_model
+import os
+from tensorflow.keras.models import Sequential  # type: ignore
+from tensorflow.keras.layers import Dense       # type: ignore
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
-from keras.utils import np_utils
+from tensorflow.keras.utils import to_categorical  # type: ignore
+import sys
+sys.path.append(r'C:/Users/Admin/Desktop/hiproject/Project')
+
+import Ai_model  # Now you can access functions from Ai_model.py
+
+
+
 
 global size
 # OG size = 300
 size = 300
 model = Sequential()
-model = load_model('C:\Users\Admin\Desktop\hiproject\Project\Ai_model.py')
+
 
 
 ## load Testing data : non-pothole E:/Major 7sem/pothole-and-plain-rode-images/My Dataset/test/Plain
-nonPotholeTestImages = glob.glob("E:/Major 7sem/pothole-and-plain-rode-images/My Dataset/test/Plain/*.jpg")
+nonPotholeTestImages = glob.glob("C:/Users/Admin/Desktop/hiproject/Project/normal")
 # nonPotholeTrainImages.extend(glob.glob("C:/Users/anant/Desktop/pothole-and-plain-rode-images/My Dataset/train/Plain/*.jpeg"))
 # nonPotholeTrainImages.extend(glob.glob("C:/Users/anant/Desktop/pothole-and-plain-rode-images/My Dataset/train/Plain/*.png"))
 test2 = [cv2.imread(img,0) for img in nonPotholeTestImages]
@@ -27,7 +35,7 @@ temp4 = np.asarray(test2)
 
 
 ## load Testing data : potholes E:\Major 7sem\pothole-and-plain-rode-images\My Dataset\test\Pothole
-potholeTestImages = glob.glob("E:/Major 7sem/pothole-and-plain-rode-images/My Dataset/test/Pothole/*.jpg")
+potholeTestImages = glob.glob("C:/Users/Admin/Desktop/hiproject/Project/normal")
 # nonPotholeTrainImages.extend(glob.glob("C:/Users/anant/Desktop/pothole-and-plain-rode-images/My Dataset/train/Plain/*.jpeg"))
 # nonPotholeTrainImages.extend(glob.glob("C:/Users/anant/Desktop/pothole-and-plain-rode-images/My Dataset/train/Plain/*.png"))
 test1 = [cv2.imread(img,0) for img in potholeTestImages]
