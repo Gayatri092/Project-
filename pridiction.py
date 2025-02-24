@@ -3,11 +3,11 @@ import numpy as np
 import cv2
 import glob
 import os
-from tensorflow.keras.models import Sequential  # type: ignore
-from tensorflow.keras.layers import Dense       # type: ignore
+from tensorflow.keras.models import Sequential  
+from tensorflow.keras.layers import Dense   
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.utils import to_categorical  # type: ignore
+from tensorflow.keras.utils import to_categorical  
 import sys
 sys.path.append(r'C:/Users/Admin/Desktop/hiproject/Project')
 
