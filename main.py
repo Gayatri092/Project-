@@ -73,7 +73,8 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 model.fit(X_train, y_train, epochs=15, batch_size=32, validation_data=(X_test, y_test))
 
 # Save Model
-model.save("pothole_detector.h5")
+model.save("pothole_detector.keras")  # Save in the recommended format
+
 
 # Evaluate Model
 loss, accuracy = model.evaluate(X_test, y_test)
