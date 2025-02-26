@@ -7,6 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.models import Sequential  
 from tensorflow.keras.layers import Dense  
+import joblib
 
 # Load CSV File
 csv_file = "C:/Users/Admin/Desktop/hiproject/Project/dataa.csv"
@@ -54,6 +55,9 @@ y_filtered = np.array(y_filtered)
 # Standardize Features
 scaler = StandardScaler()
 X = scaler.fit_transform(X)
+
+# Save the scaler for future use (IMPORTANT)
+joblib.dump(scaler, "scaler.pkl")
 
 # Split Dataset into Training and Testing Sets
 X_train, X_test, y_train, y_test = train_test_split(X, y_filtered, test_size=0.2, random_state=42)
