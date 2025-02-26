@@ -36,7 +36,8 @@ def detect_pothole_contours(frame):
     return pothole_contours
 
 # Open webcam
-cap = cv2.VideoCapture(0)
+url = "https://100.120.224.1:8080/video"
+cap = cv2.VideoCapture(url)
 
 while cap.isOpened():
     ret, frame = cap.read()
@@ -53,8 +54,8 @@ while cap.isOpened():
     pred = model.predict(features)[0][0]  # Output probability
 
     # Determine label
-    label = "POTHOLE" if pred > 0.5 else "NORMAL"
-    color = (0, 0, 255) if pred > 0.5 else (0, 255, 0)
+    label = "POTHOLE" if pred > 0.3 else "NORMAL"
+    color = (0, 0, 255) if pred > 0.3 else (0, 255, 0)
 
     if label == "POTHOLE":
         pothole_contours = detect_pothole_contours(frame)
