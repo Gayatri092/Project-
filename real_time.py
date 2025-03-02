@@ -5,6 +5,7 @@ from skimage.feature import hog
 from tensorflow.keras.models import load_model
 from sklearn.preprocessing import StandardScaler
 import joblib
+import time  # Import time module for unique filenames
 
 # Load the trained model
 model = load_model("Project/pothole_detector.h5")
@@ -36,7 +37,7 @@ def detect_pothole_contours(frame):
     return pothole_contours
 
 # Open webcam
-url = "https://100.120.224.1:8080/video"
+url = "http://100.120.189.60:8080/video"
 cap = cv2.VideoCapture(url)
 
 while cap.isOpened():
@@ -65,10 +66,12 @@ while cap.isOpened():
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)  # Draw bounding box
         
         cv2.putText(frame, "POTHOLE DETECTED!", (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-        
-        # Save the captured frame
-        cv2.imwrite("pothole_image.jpg", frame)
-        print("✅ Frame Captured and Saved!")
+
+        # Save the captured frame with a unique filename using timestamp
+        timestamp = time.strftime("%Y%m%d-%H%M%S")
+        filename = f"pothole_{timestamp}.jpg"
+        cv2.imwrite(filename, frame)
+        print(f"✅ Frame Captured and Saved as {filename}!")
 
     # Display result on frame
     cv2.putText(frame, label, (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
