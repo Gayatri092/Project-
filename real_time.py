@@ -38,7 +38,7 @@ def detect_pothole_contours(frame):
 
 # Open webcam
 url = "http://100.120.189.60:8080/video"
-cap = cv2.VideoCapture(url)
+cap = cv2.VideoCapture(0)
 
 while cap.isOpened():
     ret, frame = cap.read()
